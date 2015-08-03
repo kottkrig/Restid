@@ -112,28 +112,7 @@ var Restid = React.createClass({
       </ScrollView>
       )
   },
-
-var departureStyle = function(bgColor) {
-  return {
-    backgroundColor: bgColor,
-    padding: 10,
-    borderTopColor: "rgba(255, 255, 255, 0.4)",
-    borderTopWidth: 1,
-    borderBottomColor: "rgba(0, 0, 0, 0.2)",
-    borderBottomWidth: 1,
-    flexDirection: "row",
-    flex: 1,
-    alignItems: "center",
-  }
-};
-
-var departureLineStyle = function(fgColor) {
-  return {
-    color: fgColor,
-    fontSize: 40,
-    fontWeight: "bold"
-  }
-}
+});
 
 var styles = StyleSheet.create({
   container: {
