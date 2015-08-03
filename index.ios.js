@@ -113,23 +113,6 @@ var Restid = React.createClass({
       )
   },
 
-  renderDeparture: function(departure) {
-    return (
-      <View style={departureStyle(departure.fgColor)}>
-        <View style={styles.leftContainer}>
-          <Text style={departureLineStyle(departure.bgColor)}>{departure.sname}</Text>
-          <Text style={styles.direction}>→ {departure.direction}</Text>
-          <Text style={styles.stop}>{departure.journeyid}</Text>
-        </View>
-        <View style={styles.rightContainer}>
-          <Text style={styles.time}>{departure.rtTime}</Text>
-        </View>
-        
-      </View>
-    );
-  },
-});
-
 var departureStyle = function(bgColor) {
   return {
     backgroundColor: bgColor,
