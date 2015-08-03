@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 var apiKey = require("./api-key.json");
 
@@ -30,4 +30,4 @@ module.exports = {
   getOriginString: function(origin) {
     return `&originCoordLat=${origin.coord.lat}&originCoordLong=${origin.coord.long}&originCoordName=${origin.coord.name}`;
   }
-}
+};
