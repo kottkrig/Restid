@@ -30,8 +30,8 @@ var TripView = React.createClass({
           serverDate: new Date(`${responseData.TripList.serverdate} ${responseData.TripList.servertime}`),
           trips: responseData.TripList.Trip.slice(0, 2),
           loaded: true
-        })
-      })
+        });
+      });
   },
 
   render: function() {
