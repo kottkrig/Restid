@@ -12,6 +12,7 @@ var APICommunicator = require("./APICommunicator");
 var DateUtilities = require("./DateUtilities");
 
 var Leg = require("./Leg");
+var TripTimeVisualisation = require("./TripTimeVisualisation");
 
 var TripView = React.createClass({
 
@@ -53,7 +54,6 @@ var TripView = React.createClass({
     }
 
     var trips = this.state.trips.map((trip, index) => {return <Trip trip={trip} key={index} serverDate={this.state.serverDate} />});
-    console.log(trips);
 
     return (
       <View style={styles.container}>
@@ -104,7 +104,7 @@ var Trip = React.createClass({
       <View style={styles.content}>
         <View style={styles.travelDescription}>
           <Text style={styles.originDestinationName}>{legProps[0].Origin.name}</Text>
-          <View style={styles.legsContainer}>{legViews}</View>
+          <TripTimeVisualisation legs={legProps} />
           <Text style={styles.originDestinationName}>{legProps[legProps.length - 1].Destination.name}</Text>
         </View>
         <View style={styles.departureTimeContainer}>
