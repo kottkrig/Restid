@@ -83,11 +83,7 @@ var Trip = React.createClass({
   render: function() {
 
     var legProps = this.trimWalks(this.props.trip.Leg);
-    var legViews = [];
-    console.log(this.props.trip);
-    legProps.forEach(function(leg, index) {
-      legViews.push(<Leg leg={leg} key={index} />);
-    });
+    var legViews = legProps.map((leg, index) => <Leg leg={leg} key={index} />);
 
     var isRealtime = legProps[0].Origin.rtDate !== undefined;
 
