@@ -9,6 +9,7 @@ var {
 } = React;
 
 var APICommunicator = require("./APICommunicator");
+var DateUtilities = require("./DateUtilities");
 
 var Leg = require("./Leg");
 
@@ -27,7 +28,7 @@ var TripView = React.createClass({
       .then((responseData) => {
         console.log(responseData);
         this.setState({
-          serverDate: new Date(`${responseData.TripList.serverdate} ${responseData.TripList.servertime}`),
+          serverDate: DateUtilities.createDate(responseData.TripList.serverdate, responseData.TripList.servertime),
           trips: responseData.TripList.Trip.slice(0, 2),
           loaded: true
         });
@@ -93,9 +94,9 @@ var Trip = React.createClass({
     var departureDate;
 
     if (isRealtime) {
-      departureDate = new Date(`${legProps[0].Origin.rtDate} ${legProps[0].Origin.rtTime}`);
+      departureDate = DateUtilities.createDate(legProps[0].Origin.rtDate, legProps[0].Origin.rtTime);
     } else {
-      departureDate = new Date(`${legProps[0].Origin.date} ${legProps[0].Origin.time}`);
+      departureDate = DateUtilities.createDate(legProps[0].Origin.date, legProps[0].Origin.time);
     }
 
     console.log("Leaving in: ", departureDate - this.props.serverDate);
