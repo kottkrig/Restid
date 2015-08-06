@@ -82,6 +82,8 @@ var Restid = React.createClass({
     console.log("index: handleAppStateChange:", currentAppState);
     if (currentAppState === "active") {
       this.refreshPosition();
+    } else {
+      navigator.geolocation.clearWatch(this.watchID);
     }
   },
 
