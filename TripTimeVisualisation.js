@@ -7,7 +7,7 @@ var {
   Text,
 } = React;
 
-var hourInPixels = 200;
+var hourInPixels = 250;
 
 var TripUtilities = require("./TripUtilities");
 
