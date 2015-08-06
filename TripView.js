@@ -100,17 +100,18 @@ var Trip = React.createClass({
     var minutes = (departureDate - this.props.serverDate) / 1000 / 60;
     var timeString = isRealtime ? `${minutes}` : `ca ${minutes}`;
 
+    var lastDestination = legProps[legProps.length - 1].Destination;
+    var arrivalTimeString = lastDestination.rtDate ? lastDestination.rtTime : "ca " + lastDestination.time;
+
     return (
       <View style={styles.content}>
         <View style={styles.travelDescription}>
-          <Text style={styles.originDestinationName}>{legProps[0].Origin.name}</Text>
+          <Text style={styles.departureStop}>Från {legProps[0].Origin.name.split(",")[0]}</Text>
           <TripTimeVisualisation legs={legProps} />
-          <Text style={styles.originDestinationName}>{legProps[legProps.length - 1].Destination.name}</Text>
-        </View>
-        <View style={styles.departureTimeContainer}>
-          <Text style={styles.timeRemainingSmall}>Avgår om</Text>
-          <Text style={styles.timeRemainingBig}>{timeString}</Text>
-          <Text style={styles.timeRemainingSmall}>min</Text>
+          <View style={styles.timeContainer}>
+            <Text style={styles.departureTime}>Om {timeString} min</Text>
+            <Text style={styles.arrivalTime}>Framme {arrivalTimeString}</Text>
+          </View>
         </View>
       </View>
     );
@@ -163,8 +164,23 @@ var styles = StyleSheet.create({
     flex: 1
   },
 
-  departureTimeContainer: {
-    
+  timeContainer: {
+    flexDirection: "row",
+    marginTop: 5
+  },
+
+  departureTime: {
+    fontWeight: "bold",
+    marginRight: 10
+  },
+
+  arrivalTime: {
+    color: "#999"
+  },
+
+  departureStop: {
+    color: "#999",
+    marginBottom: 5
   },
 
   timeRemainingBig: {
