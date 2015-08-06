@@ -4,9 +4,11 @@ var apiKey = require("./api-key.json");
 
 var authKey = apiKey.authKey;
 
+var walkSpeed = 140;
+
 module.exports = {
   fetchTrips: function(origin, destination) {
-    var tripUrl = `http://api.vasttrafik.se/bin/rest.exe/v1/trip?authKey=${authKey}&format=json${this.getOriginString(origin)}${this.getDestinationString(destination)}`;
+    var tripUrl = `http://api.vasttrafik.se/bin/rest.exe/v1/trip?authKey=${authKey}&format=json&walkSpeed=${walkSpeed}${this.getOriginString(origin)}${this.getDestinationString(destination)}`;
     console.log(tripUrl);
     return fetch(tripUrl)
       .then((response) => response.json(), (error) => console.error(error));
