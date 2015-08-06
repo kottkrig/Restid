@@ -12,6 +12,7 @@ module.exports = {
   },
 
   getDateFromLegStop: function(legStop) {
+    console.log("TripUtilities: getDateFromLegStop:", legStop);
     var isRealtime = legStop.rtDate !== undefined;
 
     var date
