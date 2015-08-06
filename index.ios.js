@@ -86,6 +86,7 @@ var Restid = React.createClass({
   },
 
   refreshPosition: function() {
+    console.log("refreshPosition()");
     return this.fetchLastPosition()
       .then((lastPosition) => {
         this.setState({origin: {
@@ -100,6 +101,7 @@ var Restid = React.createClass({
   },
 
   fetchLastPosition: function() {
+    console.log("fetchLastPosition()");
     return new Promise((resolve, reject) => {
       navigator.geolocation.clearWatch(this.watchID);
       this.watchID = navigator.geolocation.watchPosition((lastPosition) => {
