@@ -26,6 +26,7 @@ var React = require('react-native');
 var {
   AsyncStorage,
   AppRegistry,
+  AppStateIOS,
   NavigatorIOS,
   StyleSheet,
   MapView,
@@ -58,18 +59,7 @@ var Restid = React.createClass({
   },
 
   componentDidMount: function() {
-    this.watchID = navigator.geolocation.watchPosition((lastPosition) => {
-      console.log("lastPosition: ", lastPosition)
-      this.setState({origin: {
-        name: "Nuvarande position",
-        coord: {
-          lat: lastPosition.coords.latitude,
-          long: lastPosition.coords.longitude
-        }
-      }});
-      navigator.geolocation.clearWatch(this.watchID);
-      this.watchID = null;
-    }, null, {enableHighAccuracy: true, timeout: 100, maximumAge: 1000});
+    this.refreshPosition();
 
     AsyncStorage.getItem(DESTINATIONS_STORAGE_KEY)
       .then((value) => {
@@ -79,10 +69,45 @@ var Restid = React.createClass({
         }
       })
       .done();
+
+      AppStateIOS.addEventListener("change", this.handleAppStateChange);
   },
 
   componentWillUnmount: function() {
     navigator.geolocation.clearWatch(this.watchID);
+    AppStateIOS.removeEventListener("change", this.handleAppStateChange);
+  },
+
+  handleAppStateChange: function(currentAppState) {
+    console.log("index: handleAppStateChange:", currentAppState);
+    if (currentAppState === "active") {
+      this.refreshPosition();
+    }
+  },
+
+  refreshPosition: function() {
+    return this.fetchLastPosition()
+      .then((lastPosition) => {
+        this.setState({origin: {
+          name: "Nuvarande position",
+          coord: {
+            lat: lastPosition.coords.latitude,
+            long: lastPosition.coords.longitude
+          }
+        }});
+      })
+      .done();
+  },
+
+  fetchLastPosition: function() {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.clearWatch(this.watchID);
+      this.watchID = navigator.geolocation.watchPosition((lastPosition) => {
+        navigator.geolocation.clearWatch(this.watchID);
+        this.watchID = null;
+        resolve(lastPosition);
+      }, null, {enableHighAccuracy: true, timeout: 100, maximumAge: 1000});
+    });
   },
 
   onDestinationAdd: function(destination) {
