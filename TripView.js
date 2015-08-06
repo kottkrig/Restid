@@ -25,15 +25,28 @@ var TripView = React.createClass({
   },
 
   componentDidMount: function() {
-    APICommunicator.fetchTrips(this.props.origin, this.props.destination)
+    this.fetchTrips(this.props.origin, this.props.destination);
+  },
+
+  componentWillReceiveProps: function(nextProps) {
+    this.fetchTrips(nextProps.origin, nextProps.destination);
+  },
+
+  fetchTrips: function(origin, destination) {
+    return APICommunicator.fetchTrips(origin, destination)
       .then((responseData) => {
-        console.log(responseData);
+        console.log("TripView: fetchTrips: responseData:", responseData);
+        if (responseData.TripList.error) {
+          return;
+        }
+
         this.setState({
           serverDate: DateUtilities.createDate(responseData.TripList.serverdate, responseData.TripList.servertime),
           trips: responseData.TripList.Trip.slice(0, 2),
           loaded: true
         });
-      });
+      })
+      .done();
   },
 
   render: function() {
