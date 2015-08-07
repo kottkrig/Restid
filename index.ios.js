@@ -128,14 +128,14 @@ var Restid = React.createClass({
   render: function() {
 
     if (!this.state.origin) {
-      return (<View />);
+      return (<View style={styles.container} />);
     }
 
     var destinations = this.state.destinations
       .map((destination, index) => <TripView key={index} origin={this.state.origin} destination={destination}></TripView>);
 
     return (
-      <ScrollView>
+      <ScrollView style={styles.container}>
         {destinations}
         <AddView onAdd={this.onDestinationAdd} />
       </ScrollView>
@@ -146,34 +146,7 @@ var Restid = React.createClass({
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
-  },
-  map: {
-    height: 150,
-  },
-  leftContainer: {
-    flex: 1,
-  },
-  rightContainer: {
-    width: 100,
-  },
-  direction: {
-    color: "white",
-    fontWeight: "bold",
-    fontSize: 15
-  },
-  time: {
-    color: "white",
-    textAlign: "center",
-    fontWeight: "bold",
-    fontSize: 30,
-    
-  },
-  stop: {
-    color: "white"
-  },
-  listView: {
-
+    backgroundColor: '#eeeef0',
   }
 });
 
