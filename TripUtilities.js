@@ -23,5 +23,11 @@ module.exports = {
     }
 
     return date;
+  },
+
+  getDurationUntilDeparture: function(origin, serverDate) {
+    var originDate = this.getDateFromLegStop(origin);
+    console.log("TripUtilities: getDurationUntilDeparture: ", originDate, serverDate);
+    return originDate - serverDate;
   }
 };

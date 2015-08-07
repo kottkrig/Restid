@@ -16,8 +16,11 @@ var TripTimeVisualisation = React.createClass({
   render: function() {
 
     var legs = this.props.legs.map((leg, index) => <Leg leg={leg} key={index} />);
+    var durationUntilDepartureInMs = TripUtilities.getDurationUntilDeparture(this.props.legs[0].Origin, this.props.serverDate);
+    var durationUntilDepartureInHours = durationUntilDepartureInMs / 1000 / 60 / 60;
+
     return (
-      <View style={styles.legContainer}>
+      <View style={[{left: durationUntilDepartureInHours * hourInPixels}, styles.legContainer]}>
         {legs}
       </View>
     );

@@ -120,7 +120,7 @@ var Trip = React.createClass({
       <View style={styles.content}>
         <View style={styles.travelDescription}>
           <Text style={styles.departureStop}>Från {legProps[0].Origin.name.split(",")[0]}</Text>
-          <TripTimeVisualisation legs={legProps} />
+          <TripTimeVisualisation legs={legProps} serverDate={this.props.serverDate} />
           <View style={styles.timeContainer}>
             <Text style={styles.departureTime}>Om {timeString} min</Text>
             <Text style={styles.arrivalTime}>Framme {arrivalTimeString}</Text>
