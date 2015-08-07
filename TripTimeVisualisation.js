@@ -53,11 +53,14 @@ var styles = StyleSheet.create({
   },
 
   iconContainer: {
-    padding: 4
+    padding: 4,
+    height: 40,
+    justifyContent: "center"
   },
 
   iconText: {
-    textAlign: "center"
+    textAlign: "center",
+    fontWeight: "bold"
   }
 })
 
