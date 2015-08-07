@@ -19,6 +19,7 @@ var TripView = React.createClass({
   getInitialState: function() {
     return {
       loaded: false,
+      failed: false,
       trips: [],
       serverDate: new Date("2015-07-16 12:28")
     };
@@ -37,6 +38,7 @@ var TripView = React.createClass({
       .then((responseData) => {
         console.log("TripView: fetchTrips: responseData:", responseData);
         if (responseData.TripList.error) {
+          this.setState({failed: true, loaded: true});
           return;
         }
 
@@ -64,6 +66,10 @@ var TripView = React.createClass({
           
         </View>
       );
+    }
+
+    if (this.state.failed) {
+      return(<View />);
     }
 
     var trips = this.state.trips.map((trip, index) => {return <Trip trip={trip} key={index} serverDate={this.state.serverDate} />});
