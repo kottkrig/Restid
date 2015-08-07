@@ -20,8 +20,13 @@ var TripTimeVisualisation = React.createClass({
     var durationUntilDepartureInHours = durationUntilDepartureInMs / 1000 / 60 / 60;
 
     return (
-      <View style={[{left: durationUntilDepartureInHours * hourInPixels}, styles.legContainer]}>
-        {legs}
+      <View style={{flexDirection: "row"}}>
+        <View style={{width: durationUntilDepartureInHours * hourInPixels}}>
+          <View style={styles.departureFill} />
+        </View>
+        <View style={[styles.legContainer]}>
+          {legs}
+        </View>
       </View>
     );
   }
@@ -53,6 +58,15 @@ var styles = StyleSheet.create({
 
   legContainer: {
     flexDirection: "row",
+  },
+
+  departureFill: {
+    borderColor: "white",
+    borderTopColor: "black",
+    borderStyle: "dotted",
+    borderWidth: 1,
+    flex: 1,
+    marginTop: 19
   },
 
   iconContainer: {
