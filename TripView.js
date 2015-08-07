@@ -71,8 +71,9 @@ var TripView = React.createClass({
     return (
       <View style={styles.container}>
         <Text style={styles.header}>{this.props.destination.name.toUpperCase()}</Text>
-        <View style={styles.headerSeparator} />
-        {trips}
+        <View style={styles.tripsContainer}>
+          {trips}
+        </View>
       </View>
     )
   },
@@ -147,14 +148,24 @@ var Trip = React.createClass({
 
 var styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
-    margin: 20
+    margin: 10
+  },
+
+  tripsContainer: {
+    padding: 20,
+    backgroundColor: "white",
+    borderRadius: 2,
+    shadowColor: "#d6d6d8",
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 1,
+    shadowRadius: 0,
+    marginBottom: 20,
   },
 
   header: {
     fontStyle: "italic",
     color: "#545454",
-    marginBottom: 5
+    marginBottom: 15
   },
 
   headerSeparator: {
@@ -174,7 +185,8 @@ var styles = StyleSheet.create({
   },
 
   travelDescription: {
-    flex: 1
+    flex: 1,
+    overflow: "hidden"
   },
 
   timeContainer: {
