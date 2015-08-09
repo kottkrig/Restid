@@ -42,6 +42,8 @@ var {
 var TripView = require("./TripView");
 var AddView = require("./AddView");
 
+var constants = require("./constants");
+
 console.log(StatusBarIOS.Style);
 
 var Restid = React.createClass({
@@ -55,6 +57,7 @@ var Restid = React.createClass({
       serverDate: new Date("2015-07-16 12:28"),
       destinations: [],
       origin: null,
+      isAddViewVisible: false,
     };
   },
 
@@ -119,10 +122,19 @@ var Restid = React.createClass({
     var destinations = this.state.destinations;
     destinations.push(destination);
     this.setState({
-      destinations: destinations
+      destinations: destinations,
+      isAddViewVisible: false
     });
 
     AsyncStorage.setItem(DESTINATIONS_STORAGE_KEY, JSON.stringify(destinations));
+  },
+
+  onPressAdd: function() {
+    this.setState({isAddViewVisible: true});
+  },
+
+  addViewDismissed: function() {
+    this.setState({isAddViewVisible: false});
   },
 
   render: function() {
@@ -135,20 +147,39 @@ var Restid = React.createClass({
       .map((destination, index) => <TripView key={index} origin={this.state.origin} destination={destination}></TripView>);
 
     return (
-      <ScrollView style={styles.container}>
-        {destinations}
-        <AddView onAdd={this.onDestinationAdd} />
-      </ScrollView>
+      <View style={styles.outerContainer}>
+        <AddView onAdd={this.onDestinationAdd} isVisible={this.state.isAddViewVisible} onDismiss={this.addViewDismissed} />
+        <ScrollView style={styles.container}>
+          {destinations}
+          <Text style={styles.addButton} onPress={this.onPressAdd}>Lägg till hållplats</Text>
+          
+        </ScrollView>
+      </View>
       )
   },
 });
 
 var styles = StyleSheet.create({
+
+  outerContainer: {
+    backgroundColor: constants.backgroundColor,
+    flex: 1
+  },
+
   container: {
     flex: 1,
-    backgroundColor: '#eeeef0',
+    backgroundColor: constants.backgroundColor,
     padding: 10
-  }
+  },
+
+  addButton: {
+    borderWidth: 1,
+    borderColor: constants.tintColor,
+    textAlign: "center",
+    padding: 10,
+    color: constants.tintColor,
+    marginBottom: 80
+  },
 });
 
 

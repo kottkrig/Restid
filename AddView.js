@@ -2,13 +2,18 @@
 
 var AutoComplete = require("react-native-autocomplete");
 var APICommunicator = require("./APICommunicator");
+var Button = require("./Button");
+var constants = require("./constants");
+var Overlay = require("react-native-overlay");
+var BlurView = require("react-native-blur").BlurView
 
 var React = require('react-native');
 var {
   StyleSheet,
   View,
   Text,
-  AlertIOS
+  AlertIOS,
+  TouchableHighlight
 } = React;
 
 var AddView = React.createClass({
@@ -17,7 +22,8 @@ var AddView = React.createClass({
     return {
       autocompleteDataNames: [],
       autocompleteDataFull: [],
-      selectedStop: undefined
+      selectedStop: undefined,
+      addViewVisible: true
     };
   },
 
@@ -59,36 +65,51 @@ var AddView = React.createClass({
     console.log("Leg: render: props: ", this.props);
 
     var button = this.state.selectedStop ? 
-      <Text onPress={this.onPressConfirm}>Lägg till</Text> :
+      <Button onPress={this.onPressConfirm} /> :
       <Text>Välj en hållplats</Text>
 
     return (
-      <View>
-        <AutoComplete 
-          onTyping={this.onSearchFieldTyping}
-          onSelect={this.onSelect}
-          suggestions={this.state.autocompleteDataNames}
-          style={{borderWidth: 1, borderColor: "lightblue", height: 50}} />
+      <Overlay isVisible={this.props.isVisible} style={{flex: 1}}>
+        <BlurView style={styles.background} blurType="light">
+          <View style={styles.container}>
+            <AutoComplete 
+              onTyping={this.onSearchFieldTyping}
+              onSelect={this.onSelect}
+              suggestions={this.state.autocompleteDataNames}
+              placeholder="Sök efter hållplats"
+              style={{borderWidth: 1, borderColor: constants.tintColor, height: 50, color: constants.tintColor}} />
 
-          {button}
-      </View>
+              <Button onPress={this.onPressConfirm} text="Lägg till hållplats" style={styles.buttonConfirm} isDisabled={this.state.selectedStop === undefined} /> 
+          </View>
+        </BlurView>
+      </Overlay>
     );
   }
 });
 
 var styles = StyleSheet.create({
 
-  legContainer: {
+  background: {
+    flex: 1,
     flexDirection: "row",
+    justifyContent: "center"
   },
 
-  iconContainer: {
-    padding: 4,
-    width: 25
+  buttonConfirm: {
+    marginTop: 10
   },
 
-  iconText: {
-    textAlign: "center"
+  container: {
+    margin: 20,
+    padding: 20,
+    backgroundColor: "white",
+    alignSelf: "center",
+    height: 200,
+    flex: 1,
+    shadowColor: "black",
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    shadowOffset: {width: 0, height: 2}
   }
 })
 
