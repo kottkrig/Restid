@@ -45,7 +45,8 @@ var TripView = React.createClass({
         this.setState({
           serverDate: DateUtilities.createDate(responseData.TripList.serverdate, responseData.TripList.servertime),
           trips: responseData.TripList.Trip.slice(0, 2),
-          loaded: true
+          loaded: true,
+          failed: false
         });
       })
       .done();
