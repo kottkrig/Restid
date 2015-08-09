@@ -154,7 +154,7 @@ var Trip = React.createClass({
 
 var styles = StyleSheet.create({
   container: {
-    margin: 10
+    
   },
 
   tripsContainer: {

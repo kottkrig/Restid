@@ -147,6 +147,7 @@ var styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#eeeef0',
+    padding: 10
   }
 });
 
