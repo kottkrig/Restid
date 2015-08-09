@@ -1,3 +1,4 @@
 module.exports = {
-  tintColor: "purple"
+  tintColor: "purple",
+  backgroundColor: "#eeeef0"
 }
