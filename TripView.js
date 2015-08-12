@@ -57,7 +57,7 @@ var TripView = React.createClass({
     if (!this.state.loaded) {
       return (
         <View style={styles.container}>
-          <Text style={styles.header}>{this.props.destination.name.toUpperCase()}</Text>
+          <Text style={styles.header}>TILL {this.props.destination.name.toUpperCase()}:</Text>
           <View style={styles.headerSeparator} />
           <View style={styles.content}>
             <ActivityIndicatorIOS 
@@ -77,7 +77,7 @@ var TripView = React.createClass({
 
     return (
       <View style={styles.container}>
-        <Text style={styles.header}>{this.props.destination.name.toUpperCase()}</Text>
+        <Text style={styles.header}>TILL {this.props.destination.name.toUpperCase()}:</Text>
         <View style={styles.tripsContainer}>
           {trips}
         </View>
