@@ -45,6 +45,8 @@ var TripView = React.createClass({
             "responseData is null",
             `destination: ${destination.name}`
           );
+          this.setState({failed: true, loaded: true});
+          return;
         }
 
         if (!responseData.TripList) {
@@ -52,6 +54,8 @@ var TripView = React.createClass({
             "responseData.TripList is null",
             JSON.stringify(responseData)
           );
+          this.setState({failed: true, loaded: true});
+          return;
         }
 
         if (responseData.TripList.error) {
