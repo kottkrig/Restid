@@ -3,6 +3,7 @@
 var React = require('react-native');
 var {
   ActivityIndicatorIOS,
+  AlertIOS,
   StyleSheet,
   View,
   Text,
@@ -37,6 +38,21 @@ var TripView = React.createClass({
     return APICommunicator.fetchTrips(origin, destination)
       .then((responseData) => {
         console.log("TripView: fetchTrips: responseData:", responseData);
+
+        if (!responseData) {
+          AlertIOS.alert(
+            "responseData is null",
+            `destination: ${destination.name}`
+          );
+        }
+
+        if (!responseData.TripList) {
+          AlertIOS.alert(
+            "responseData.TripList is null",
+            JSON.stringify(responseData)
+          );
+        }
+
         if (responseData.TripList.error) {
           this.setState({failed: true, loaded: true});
           return;
