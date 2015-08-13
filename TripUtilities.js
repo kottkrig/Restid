@@ -29,5 +29,19 @@ module.exports = {
     var originDate = this.getDateFromLegStop(origin);
     console.log("TripUtilities: getDurationUntilDeparture: ", originDate, serverDate);
     return originDate - serverDate;
+  },
+
+  trimWalks: function(legs) {
+    if (legs.length > 0) {
+      if (legs[0].type === "WALK") {
+        legs = legs.slice(1);
+      }
+
+      if (legs[legs.length - 1].type === "WALK") {
+        legs = legs.slice(0, legs.length - 1);
+      }
+    }
+
+    return legs;
   }
 };

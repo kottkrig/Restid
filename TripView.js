@@ -11,6 +11,7 @@ var {
 
 var APICommunicator = require("./APICommunicator");
 var DateUtilities = require("./DateUtilities");
+var TripUtilities = require("./TripUtilities");
 
 var Leg = require("./Leg");
 var TripTimeVisualisation = require("./TripTimeVisualisation");
@@ -99,27 +100,13 @@ var TripView = React.createClass({
         </View>
       </View>
     )
-  },
-
-  trimWalks: function(legs) {
-    if (legs.length > 0) {
-      if (legs[0].type === "WALK") {
-        legs = legs.slice(1);
-      }
-
-      if (legs[legs.length - 1].type === "WALK") {
-        legs = legs.slice(0, legs.length - 1);
-      }
-    }
-
-    return legs;
   }
 });
 
 var Trip = React.createClass({
   render: function() {
 
-    var legProps = this.trimWalks(this.props.trip.Leg);
+    var legProps = TripUtilities.trimWalks(this.props.trip.Leg);
     var legViews = legProps.map((leg, index) => <Leg leg={leg} key={index} />);
 
     var isRealtime = legProps[0].Origin.rtDate !== undefined;
@@ -152,20 +139,6 @@ var Trip = React.createClass({
         </View>
       </View>
     );
-  },
-
-  trimWalks: function(legs) {
-    if (legs.length > 0) {
-      if (legs[0].type === "WALK") {
-        legs = legs.slice(1);
-      }
-
-      if (legs[legs.length - 1].type === "WALK") {
-        legs = legs.slice(0, legs.length - 1);
-      }
-    }
-
-    return legs;
   }
 })
 
