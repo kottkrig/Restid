@@ -159,7 +159,7 @@ var styles = StyleSheet.create({
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 1,
     shadowRadius: 0,
-    marginBottom: 20,
+    marginBottom: 30,
   },
 
   header: {
