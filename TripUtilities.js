@@ -5,7 +5,6 @@ var DateUtilities = require("./DateUtilities");
 module.exports = {
 
   getLegDuration: function(leg) {
-
     var originDate = this.getDateFromLegStop(leg.Origin);
     var destinationDate = this.getDateFromLegStop(leg.Destination);
     return destinationDate - originDate;
@@ -15,7 +14,7 @@ module.exports = {
     console.log("TripUtilities: getDateFromLegStop:", legStop);
     var isRealtime = legStop.rtDate !== undefined;
 
-    var date
+    var date;
     if (isRealtime) {
       date = DateUtilities.createDate(legStop.rtDate, legStop.rtTime);
     } else {
