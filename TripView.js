@@ -75,17 +75,19 @@ var TripView = React.createClass({
 
   render: function() {
 
+    var destinationName = this.props.destination.name.split(",")[0];
+
     if (!this.state.loaded) {
       return (
         <View style={styles.container}>
-          <Text style={styles.header}>TILL {this.props.destination.name.toUpperCase()}:</Text>
-          <View style={styles.headerSeparator} />
-          <View style={styles.content}>
-            <ActivityIndicatorIOS 
-              animating={true}
-              style={{justifyContent: "center", alignItems: "center"}} />
+          <View style={styles.tripsContainer}>
+            <Text style={styles.header}>TILL {destinationName.toUpperCase()}:</Text>
+            <View style={styles.loadingContainer}>
+              <ActivityIndicatorIOS 
+                animating={true}
+                style={{}} />
+            </View>
           </View>
-          
         </View>
       );
     }
@@ -98,8 +100,8 @@ var TripView = React.createClass({
 
     return (
       <View style={styles.container}>
-        <Text style={styles.header}>TILL {this.props.destination.name.toUpperCase()}:</Text>
         <View style={styles.tripsContainer}>
+          <Text style={styles.header}>TILL {destinationName.toUpperCase()}:</Text>
           {trips}
         </View>
       </View>
@@ -151,6 +153,14 @@ var styles = StyleSheet.create({
     
   },
 
+  loadingContainer: {
+    height: 220,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    flex: 1
+  },
+
   tripsContainer: {
     padding: 20,
     backgroundColor: "white",
@@ -159,12 +169,13 @@ var styles = StyleSheet.create({
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 1,
     shadowRadius: 0,
-    marginBottom: 30,
+    marginBottom: 30
   },
 
   header: {
-    fontStyle: "italic",
-    color: "#545454",
+    fontWeight: "bold",
+    fontSize: 16,
+    color: "#000",
     marginBottom: 15
   },
 
