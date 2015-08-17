@@ -4,7 +4,7 @@ var apiKey = require("./api-key.json");
 
 var authKey = apiKey.authKey;
 
-var walkSpeed = 140;
+var walkSpeed = 180;
 var maxWalkDistanceInMeters = 3000;
 
 module.exports = {
