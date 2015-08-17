@@ -31,6 +31,6 @@ module.exports = {
   },
 
   getOriginString: function(origin) {
-    return `&originCoordLat=${origin.coord.lat}&originCoordLong=${origin.coord.long}&originCoordName=${origin.coord.name}`;
+    return `&originCoordLat=${origin.coord.lat}&originCoordLong=${origin.coord.long}&originCoordName=${origin.coord.name}&originWalk=no`;
   }
 };
