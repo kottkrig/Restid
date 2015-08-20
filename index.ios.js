@@ -33,9 +33,10 @@ var {
   View,
   Text,
   ListView,
+  SegmentedControlIOS,
   StatusBarIOS,
   ScrollView,
-  AlertIOS
+  AlertIOS,
 } = React;
 
 
@@ -150,6 +151,7 @@ var Restid = React.createClass({
       <View style={styles.outerContainer}>
         <AddView onAdd={this.onDestinationAdd} isVisible={this.state.isAddViewVisible} onDismiss={this.addViewDismissed} />
         <ScrollView style={styles.container}>
+          <SegmentedControlIOS values={["Gå", "Nu", "Om 10 min", "Om 30 min"]} selectedIndex={1} style={styles.segmentedControl} tintColor={constants.tintColor} />
           {destinations}
           <Text style={styles.addButton} onPress={this.onPressAdd}>Lägg till hållplats</Text>
           
@@ -164,6 +166,10 @@ var styles = StyleSheet.create({
   outerContainer: {
     backgroundColor: constants.backgroundColor,
     flex: 1
+  },
+
+  segmentedControl: {
+    marginBottom: 20
   },
 
   container: {
