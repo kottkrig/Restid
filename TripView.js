@@ -93,7 +93,15 @@ var TripView = React.createClass({
     }
 
     if (this.state.failed) {
-      return(<View />);
+      return(
+        <View style={[styles.inactiveContainer, styles.container]}>
+          <View style={styles.tripsContainer}>
+            <Text style={styles.header}>TILL {destinationName.toUpperCase()}:</Text>
+            <View style={styles.loadingContainer}>
+            </View>
+          </View>
+        </View>
+      );
     }
 
     var trips = this.state.trips.map((trip, index) => {return <Trip trip={trip} key={index} serverDate={this.state.serverDate} />});
@@ -151,6 +159,12 @@ var Trip = React.createClass({
 var styles = StyleSheet.create({
   container: {
     
+  },
+
+  inactiveContainer: {
+    transform: [{rotateX: "70deg"}],
+    shadowColor: "black",
+    shadowOpacity: 0.4 
   },
 
   loadingContainer: {
