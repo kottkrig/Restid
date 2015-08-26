@@ -6,10 +6,11 @@ var authKey = apiKey.authKey;
 
 var walkSpeed = 180;
 var maxWalkDistanceInMeters = 3000;
+var walk = false;
 
 module.exports = {
   fetchTrips: function(origin, destination) {
-    var tripUrl = `http://api.vasttrafik.se/bin/rest.exe/v1/trip?authKey=${authKey}&format=json&walkSpeed=${walkSpeed}&maxWalkDist=${maxWalkDistanceInMeters}${this.getOriginString(origin)}${this.getDestinationString(destination)}`;
+    var tripUrl = `http://api.vasttrafik.se/bin/rest.exe/v1/trip?authKey=${authKey}&format=json${this.getOptionsString()}${this.getOriginString(origin)}${this.getDestinationString(destination)}`;
     console.log(tripUrl);
     return fetch(tripUrl)
       .then((response) => response.json(), (error) => console.error(error));
@@ -20,6 +21,11 @@ module.exports = {
     console.log("APICommunicator: fetchLocationsForSearchString: url: ", url);
     return fetch(url)
       .then((response) => response.json(), (error) => console.error(error));
+  },
+
+  getOptionsString: function() {
+    return "";
+    return `&walkSpeed=${walkSpeed}&maxWalkDist=${maxWalkDistanceInMeters}`
   },
 
   getDestinationString: function(destination) {
